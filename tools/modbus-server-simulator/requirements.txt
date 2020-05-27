@@ -1,0 +1,13 @@
+attrs==19.3.0
+Automat==20.2.0
+constantly==15.1.0
+hyperlink==19.0.0
+idna==2.9
+incremental==17.5.0
+paho-mqtt==1.5.0
+PyHamcrest==2.0.2
+pymodbus==2.3.0
+pyserial==3.4
+six==1.14.0
+Twisted==20.3.0
+zope.interface==5.1.0
