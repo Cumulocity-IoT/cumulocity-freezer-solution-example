@@ -8,7 +8,7 @@ from pymodbus.transaction import ModbusRtuFramer, ModbusAsciiFramer
 
 from twisted.internet.task import LoopingCall
 
-import logging, math
+import logging, math, random
 
 FORMAT = ('%(asctime)-15s %(threadName)-15s '
           '%(levelname)-8s %(module)-15s:%(lineno)-8s %(message)s')
@@ -33,6 +33,13 @@ def initial(a, args):
         return args[0]
     else:
         return None
+
+def binary(a, args):
+    rnd = random.randint(args[0],args[1])
+    if rnd > args[2]:
+        return 1
+    else:
+        return 0
 
 '''
 End simulation functions
@@ -59,7 +66,17 @@ SIMULATIONS = [
         "address": 0x04 ,
         "func": initial,
         "args": [4]
-    }    
+    },
+    {
+        "address": 0x05 ,
+        "func": initial,
+        "args": [0]
+    },
+    {
+        "address": 0x06 ,
+        "func": binary,
+        "args": [1,4,3]
+    }            
 ]
 
 
@@ -79,7 +96,7 @@ def simulator_function(a):
     for sim in SIMULATIONS:
         address = sim["address"]
         values = [sim["func"](LOOP_CALLS, sim["args"])]
-        if values[0]:
+        if values[0] != None:
             log.info("update address: %s ; value: %s", str(address), str(values))
             context[slave_id].setValues(register, address, values)
 

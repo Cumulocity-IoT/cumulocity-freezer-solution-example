@@ -70,16 +70,38 @@ MODBUS_HOLDING_REGISTERS = [
         'measurementFragment': 'c8y_Humidity',      # measurement fragment in Cumulocity
         'measurementSeries': 'H'                    # measurement series in Cumulocity
     },
-        {
+    {
         'number': 4,                                # the modbus number
         'startBit': 0,                              # the first bit to read from the register
         'noBits': 16,                               # the number of bits to read from the register
         'signed': False,                            # if the bytes should be interpreted as signed
-        'divisor': 1,                              # divide value by this number
+        'divisor': 1,                               # divide value by this number
         'multiplier': 1,                            # multiply the value by this number
         'offset': 0,                                # add this value to the number
         'measurementFragment': 'c8y_SetTemperature',# measurement fragment in Cumulocity
         'measurementSeries': 'T'                    # measurement series in Cumulocity
+    },
+    {
+        'number': 5,                                # the modbus number
+        'startBit': 0,                              # the first bit to read from the register
+        'noBits': 16,                               # the number of bits to read from the register
+        'signed': False,                            # if the bytes should be interpreted as signed
+        'divisor': 1,                               # divide value by this number
+        'multiplier': 1,                            # multiply the value by this number
+        'offset': 0,                                # add this value to the number
+        'measurementFragment': 'c8y_FanSpeed',      # measurement fragment in Cumulocity
+        'measurementSeries': 'S'                    # measurement series in Cumulocity
+    },
+    {
+        'number': 6,                                # the modbus number
+        'startBit': 0,                              # the first bit to read from the register
+        'noBits': 16,                               # the number of bits to read from the register
+        'signed': False,                            # if the bytes should be interpreted as signed
+        'divisor': 1,                               # divide value by this number
+        'multiplier': 1,                            # multiply the value by this number
+        'offset': 0,                                # add this value to the number
+        'measurementFragment': 'c8y_DoorStatus',    # measurement fragment in Cumulocity
+        'measurementSeries': 'opened'               # measurement series in Cumulocity
     }
 ]
 
@@ -102,12 +124,21 @@ def on_message(client, userdata, msg):
 
         # Extract value (the 'by force' way)
         try:
-            setpoint = int(messageParts[2].split('=')[1])
-            # Write value to Modbus server
-            modbus_client = ModbusClient(MODBUS_SERVER_IP, port=MODBUS_SERVER_PORT)
-            modbus_client.connect()
-            modbus_client.write_register(4, setpoint, unit=MODBUS_UNIT)
-            modbus_client.close()
+            command = messageParts[2].split('=')
+            value = int(command[1])
+            command = command[0]
+            if command == 'setpoint':
+                # Write value to Modbus server temperature setpoint register
+                modbus_client = ModbusClient(MODBUS_SERVER_IP, port=MODBUS_SERVER_PORT)
+                modbus_client.connect()
+                modbus_client.write_register(4, value, unit=MODBUS_UNIT)
+                modbus_client.close()
+            elif command == 'fan':
+                # Write value to Modbus server fan speed register
+                modbus_client = ModbusClient(MODBUS_SERVER_IP, port=MODBUS_SERVER_PORT)
+                modbus_client.connect()
+                modbus_client.write_register(5, value, unit=MODBUS_UNIT)
+                modbus_client.close()
             # Set operation to successful
             client.publish('s/us', '503,c8y_Command')
         except Exception as error:
@@ -133,7 +164,7 @@ def run_modbus_client():
         time.sleep(1)
     
     # Subscribe to error channel
-    mqtt_client.subscribe('s/e')
+    #mqtt_client.subscribe('s/e')
     # Subscribe to static downlink messages
     mqtt_client.subscribe('s/ds')
 
