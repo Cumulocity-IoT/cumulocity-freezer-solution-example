@@ -1,0 +1,10 @@
+{
+    "contextPath": "ui-assets",
+    "availability": "MARKET",
+    "type": "HOSTED",
+    "name": "ui-assets",
+    "key": "ui-assets",
+    "noAppSwitcher": true,
+    "description": "Application containing static assets for UI customization",
+    "resourcesUrl": "/"
+}

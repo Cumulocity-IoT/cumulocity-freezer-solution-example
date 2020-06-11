@@ -1,0 +1,42 @@
+<div style ="float: right; margin-right: 10px;">
+  <button type="button" class="btn btn-link c8y-realtime" title="Toggle realtime" (click)="toggle()" >
+      <span [ngClass]="realtimeState?'c8y-pulse active' : 'c8y-pulse inactive'" ></span>
+      <span >Realtime</span>
+  </button>
+  <button mat-icon-button style="color:#1776BF;" type="button" class="button" (click)="refresh()"><span class="fa fa-refresh"></span></button>  
+</div>
+   
+  
+<div>
+  <table mat-table [dataSource]="dataSource" matSort >
+
+    <!-- ID Column -->  
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+      <td mat-cell *matCellDef="let element" style="cursor: pointer;"><a><span> {{element.id}} </span></a></td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Alarms Column -->
+    <ng-container matColumnDef="alarms">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Alarms </th>
+      <td mat-cell *matCellDef="let element"> {{element.alarms}} </td>
+    </ng-container>
+
+    <!-- Availability Column -->
+    <ng-container matColumnDef="availability">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Availability </th>
+      <td mat-cell *matCellDef="let element"> {{element.availability}} </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+

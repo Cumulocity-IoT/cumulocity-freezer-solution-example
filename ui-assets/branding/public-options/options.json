@@ -1,0 +1,18 @@
+{
+    "brandingCssVars": {
+        "font-family-base": "Open Sans",
+        "brand-logo-img-height": "30%",
+        "navigator-platform-logo-height": "30%",
+        "navigator-font-family": "var(--font-family-headings)",
+        "font-family-headings": "Pacifico",
+        "brand-primary": "#209EB4",
+        "navigator-platform-logo": "url(/apps/public/ui-assets/logo-nav.svg)",
+        "brand-logo-img": "url(/apps/public/ui-assets/logo.svg)"
+    },
+    "cookieBanner": {},
+    "faviconUrl": "/apps/public/ui-assets/favicon.ico",
+    "extraCssUrls": [
+        "https://fonts.googleapis.com/css2?family=Pacifico&display=swap",
+        "/apps/public/ui-assets/styles.css"
+    ]
+}

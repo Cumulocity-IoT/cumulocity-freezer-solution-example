@@ -1,0 +1,10 @@
+{
+    "contextPath": "public-options",
+    "availability": "MARKET",
+    "type": "HOSTED",
+    "name": "public-options",
+    "key": "public-options-key",
+    "noAppSwitcher": true,
+    "description": "Application containing public options used for customization",
+    "resourcesUrl": "/"
+}
