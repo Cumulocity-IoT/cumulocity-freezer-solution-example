@@ -1,0 +1,236 @@
+{
+    "id": "38185399",
+    "builderVersion": "10.6.0.2_370086",
+    "runtimeId": "170",
+    "runtimeState": "RUNNING",
+    "runtimeError": "",
+    "runtimeErrorLocalized": [],
+    "name": "DetectTemperatureRise",
+    "description": "",
+    "state": "INACTIVE",
+    "mode": "PRODUCTION",
+    "modeProperties": {
+        "maxDelaySecsSimulation": 5
+    },
+    "builderModel": {
+        "nodeDataArray": [
+            {
+                "location": "-392 -48",
+                "id": "apama.analyticskit.blocks.core.DirectionDetector",
+                "type": "Analytics Block",
+                "parameters": [
+                    {
+                        "id": "hysteresis",
+                        "value": "1"
+                    }
+                ],
+                "categoryId": "Calculations",
+                "key": -3
+            },
+            {
+                "blockType": "c8y_Output",
+                "location": "176 -144",
+                "id": "apama.analyticskit.blocks.cumulocity.CreateEvent",
+                "type": "C8YDevice Block",
+                "parameters": [
+                    {
+                        "id": "deviceId",
+                        "value": "38186227",
+                        "c8y_type": "c8y_deviceIdOrCurrentDevice"
+                    },
+                    {
+                        "id": "eventType",
+                        "value": "c8y_RisingTemperature"
+                    },
+                    {
+                        "id": "eventText",
+                        "value": "Temperature Rising"
+                    }
+                ],
+                "categoryId": "Output",
+                "key": -2
+            },
+            {
+                "blockType": "c8y_Input",
+                "location": "-640 -128",
+                "id": "apama.analyticskit.blocks.cumulocity.DeviceMeasurementInput",
+                "type": "C8YDevice Block",
+                "parameters": [
+                    {
+                        "id": "deviceId",
+                        "value": "38186227",
+                        "c8y_type": "c8y_deviceOrGroupId"
+                    },
+                    {
+                        "id": "fragmentSeries",
+                        "value": "c8y_Temperature.T",
+                        "c8y_type": "c8y_fragmentSeries_KPI_supportedMeasurements_DataPoints"
+                    },
+                    {
+                        "id": "ignoreTimestamp",
+                        "value": false
+                    }
+                ],
+                "categoryId": "Input",
+                "key": -4
+            },
+            {
+                "location": "-128 -152",
+                "id": "apama.analyticskit.blocks.core.And",
+                "type": "Analytics Block",
+                "parameters": [],
+                "categoryId": "Logic",
+                "key": -7
+            },
+            {
+                "blockType": "c8y_Input",
+                "location": "-640 -304",
+                "id": "apama.analyticskit.blocks.cumulocity.DeviceMeasurementInput",
+                "type": "C8YDevice Block",
+                "parameters": [
+                    {
+                        "id": "deviceId",
+                        "value": "38186227",
+                        "c8y_type": "c8y_deviceOrGroupId"
+                    },
+                    {
+                        "id": "fragmentSeries",
+                        "value": "c8y_DoorStatus.opened",
+                        "c8y_type": "c8y_fragmentSeries_KPI_supportedMeasurements_DataPoints"
+                    },
+                    {
+                        "id": "ignoreTimestamp",
+                        "value": false
+                    }
+                ],
+                "categoryId": "Input",
+                "key": -8
+            },
+            {
+                "location": "-368 -248",
+                "id": "apama.analyticskit.blocks.core.Threshold",
+                "type": "Analytics Block",
+                "parameters": [
+                    {
+                        "id": "thresholdValue",
+                        "value": "0"
+                    },
+                    {
+                        "id": "direction",
+                        "value": "belowOrEqual"
+                    }
+                ],
+                "categoryId": "Calculations",
+                "key": -9
+            }
+        ],
+        "linkDataArray": [
+            {
+                "inputId": "measurementValue",
+                "outputId": "value",
+                "from": -4,
+                "to": -3,
+                "points": [
+                    -552,
+                    -128,
+                    -537,
+                    -128,
+                    -520,
+                    -128,
+                    -520,
+                    -72,
+                    -495,
+                    -72,
+                    -480,
+                    -72
+                ]
+            },
+            {
+                "inputId": "isUpwardDirection",
+                "outputId": "value2",
+                "from": -3,
+                "to": -7,
+                "points": [
+                    -304,
+                    -72,
+                    -289,
+                    -72,
+                    -244,
+                    -72,
+                    -244,
+                    -200,
+                    -231,
+                    -200,
+                    -216,
+                    -200
+                ]
+            },
+            {
+                "inputId": "measurementValue",
+                "outputId": "value",
+                "from": -8,
+                "to": -9,
+                "points": [
+                    -552,
+                    -304,
+                    -537,
+                    -304,
+                    -496,
+                    -304,
+                    -496,
+                    -272,
+                    -471,
+                    -272,
+                    -456,
+                    -272
+                ]
+            },
+            {
+                "inputId": "and",
+                "outputId": "createEvent",
+                "from": -7,
+                "to": -2,
+                "points": [
+                    -40,
+                    -152,
+                    -25,
+                    -152,
+                    24,
+                    -152,
+                    24,
+                    -168,
+                    73,
+                    -168,
+                    88,
+                    -168
+                ]
+            },
+            {
+                "inputId": "breachedThreshold",
+                "outputId": "value1",
+                "from": -9,
+                "to": -7,
+                "points": [
+                    -280,
+                    -296,
+                    -265,
+                    -296,
+                    -236,
+                    -296,
+                    -236,
+                    -248,
+                    -231,
+                    -248,
+                    -216,
+                    -248
+                ]
+            }
+        ]
+    },
+    "c8y_analyticsModel": {},
+    "type": "c8y_PublicAnalyticsBuilderModel",
+    "tags": [],
+    "userInterfaceProperties": {
+        "displayGrid": false
+    }
+}

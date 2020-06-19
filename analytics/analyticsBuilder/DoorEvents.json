@@ -1,0 +1,198 @@
+{
+    "id": "38214797",
+    "builderVersion": "10.6.0.2_370086",
+    "runtimeId": "153",
+    "runtimeState": "RUNNING",
+    "runtimeError": "",
+    "runtimeErrorLocalized": [],
+    "name": "DoorEvents",
+    "description": "",
+    "state": "INACTIVE",
+    "mode": "PRODUCTION",
+    "modeProperties": {
+        "maxDelaySecsSimulation": 5
+    },
+    "builderModel": {
+        "nodeDataArray": [
+            {
+                "blockType": "c8y_Input",
+                "location": "-64 -56",
+                "id": "apama.analyticskit.blocks.cumulocity.DeviceMeasurementInput",
+                "type": "C8YDevice Block",
+                "parameters": [
+                    {
+                        "id": "deviceId",
+                        "value": "38186227",
+                        "c8y_type": "c8y_deviceOrGroupId"
+                    },
+                    {
+                        "id": "ignoreTimestamp",
+                        "value": false
+                    },
+                    {
+                        "id": "fragmentSeries",
+                        "value": "c8y_DoorStatus.opened",
+                        "c8y_type": "c8y_fragmentSeries_KPI_supportedMeasurements_DataPoints"
+                    }
+                ],
+                "categoryId": "Input",
+                "key": -1
+            },
+            {
+                "location": "96 96",
+                "id": "apama.analyticskit.blocks.core.DirectionDetector",
+                "type": "Analytics Block",
+                "parameters": [
+                    {
+                        "id": "hysteresis",
+                        "value": 0
+                    }
+                ],
+                "categoryId": "Calculations",
+                "key": -2
+            },
+            {
+                "location": "264 296",
+                "id": "apama.analyticskit.blocks.core.Not",
+                "type": "Analytics Block",
+                "parameters": [],
+                "categoryId": "Logic",
+                "key": -3
+            },
+            {
+                "blockType": "c8y_Output",
+                "location": "440 56",
+                "id": "apama.analyticskit.blocks.cumulocity.CreateEvent",
+                "type": "C8YDevice Block",
+                "parameters": [
+                    {
+                        "id": "deviceId",
+                        "value": "38186227",
+                        "c8y_type": "c8y_deviceIdOrCurrentDevice"
+                    },
+                    {
+                        "id": "eventType",
+                        "value": "c8y_DoorOpenEvent"
+                    },
+                    {
+                        "id": "eventText",
+                        "value": "Door has been opened"
+                    }
+                ],
+                "categoryId": "Output",
+                "key": -4
+            },
+            {
+                "blockType": "c8y_Output",
+                "location": "504 232",
+                "id": "apama.analyticskit.blocks.cumulocity.CreateEvent",
+                "type": "C8YDevice Block",
+                "parameters": [
+                    {
+                        "id": "deviceId",
+                        "value": "38186227",
+                        "c8y_type": "c8y_deviceIdOrCurrentDevice"
+                    },
+                    {
+                        "id": "eventType",
+                        "value": "c8y_DoorCloseEvent"
+                    },
+                    {
+                        "id": "eventText",
+                        "value": "Door has been closed"
+                    }
+                ],
+                "categoryId": "Output",
+                "key": -5
+            }
+        ],
+        "linkDataArray": [
+            {
+                "inputId": "measurementValue",
+                "outputId": "value",
+                "from": -1,
+                "to": -2,
+                "points": [
+                    24,
+                    -56,
+                    39,
+                    -56,
+                    39,
+                    8,
+                    -7,
+                    8,
+                    -7,
+                    72,
+                    8,
+                    72
+                ]
+            },
+            {
+                "inputId": "isUpwardDirection",
+                "outputId": "value",
+                "from": -2,
+                "to": -3,
+                "points": [
+                    184,
+                    72,
+                    199,
+                    72,
+                    199,
+                    208,
+                    161,
+                    208,
+                    161,
+                    296,
+                    176,
+                    296
+                ]
+            },
+            {
+                "inputId": "notValue",
+                "outputId": "createEvent",
+                "from": -3,
+                "to": -5,
+                "points": [
+                    352,
+                    296,
+                    367,
+                    296,
+                    384,
+                    296,
+                    384,
+                    208,
+                    401,
+                    208,
+                    416,
+                    208
+                ]
+            },
+            {
+                "inputId": "isUpwardDirection",
+                "outputId": "createEvent",
+                "from": -2,
+                "to": -4,
+                "points": [
+                    184,
+                    72,
+                    199,
+                    72,
+                    268,
+                    72,
+                    268,
+                    32,
+                    337,
+                    32,
+                    352,
+                    32
+                ]
+            }
+        ]
+    },
+    "c8y_analyticsModel": {},
+    "type": "c8y_PublicAnalyticsBuilderModel",
+    "tags": [],
+    "userInterfaceProperties": {
+        "displayGrid": false
+    }
+}

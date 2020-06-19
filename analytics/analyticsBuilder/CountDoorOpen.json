@@ -1,0 +1,121 @@
+{
+    "id": "38247075",
+    "builderVersion": "10.6.0.2_370086",
+    "runtimeId": "184",
+    "runtimeState": "RUNNING",
+    "runtimeError": "",
+    "runtimeErrorLocalized": [],
+    "name": "CountDoorOpen",
+    "description": "",
+    "state": "INACTIVE",
+    "mode": "PRODUCTION",
+    "modeProperties": {
+        "maxDelaySecsSimulation": 5
+    },
+    "builderModel": {
+        "nodeDataArray": [
+            {
+                "blockType": "c8y_Input",
+                "location": "-96 -8",
+                "id": "apama.analyticskit.blocks.cumulocity.DeviceEventInput",
+                "type": "C8YDevice Block",
+                "parameters": [
+                    {
+                        "id": "deviceId",
+                        "value": "38186227",
+                        "c8y_type": "c8y_deviceOrGroupId"
+                    },
+                    {
+                        "id": "type",
+                        "value": "c8y_DoorOpenEvent"
+                    },
+                    {
+                        "id": "ignoreTimestamp",
+                        "value": false
+                    }
+                ],
+                "categoryId": "Input",
+                "key": -1
+            },
+            {
+                "location": "192 104",
+                "id": "apama.analyticskit.blocks.core.Counter",
+                "type": "Analytics Block",
+                "parameters": [],
+                "categoryId": "Aggregates",
+                "key": -2
+            },
+            {
+                "blockType": "c8y_Output",
+                "location": "440 -96",
+                "id": "apama.analyticskit.blocks.cumulocity.CreateMeasurement",
+                "type": "C8YDevice Block",
+                "parameters": [
+                    {
+                        "id": "deviceId",
+                        "value": "38186227",
+                        "c8y_type": "c8y_deviceIdOrCurrentDevice"
+                    },
+                    {
+                        "id": "fragment",
+                        "value": "c8y_DoorOpen"
+                    },
+                    {
+                        "id": "series",
+                        "value": "counter"
+                    }
+                ],
+                "categoryId": "Output",
+                "key": -3
+            }
+        ],
+        "linkDataArray": [
+            {
+                "inputId": "value",
+                "outputId": "value",
+                "from": -1,
+                "to": -2,
+                "points": [
+                    -8,
+                    -8,
+                    7,
+                    -8,
+                    76,
+                    -8,
+                    76,
+                    104,
+                    89,
+                    104,
+                    104,
+                    104
+                ]
+            },
+            {
+                "inputId": "count",
+                "outputId": "value",
+                "from": -2,
+                "to": -3,
+                "points": [
+                    280,
+                    80,
+                    295,
+                    80,
+                    316,
+                    80,
+                    316,
+                    -120,
+                    337,
+                    -120,
+                    352,
+                    -120
+                ]
+            }
+        ]
+    },
+    "c8y_analyticsModel": {},
+    "type": "c8y_PublicAnalyticsBuilderModel",
+    "tags": [],
+    "userInterfaceProperties": {
+        "displayGrid": false
+    }
+}

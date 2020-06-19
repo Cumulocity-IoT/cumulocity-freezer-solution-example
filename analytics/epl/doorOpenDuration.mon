@@ -1,0 +1,43 @@
+using com.apama.cumulocity.Measurement;
+using com.apama.cumulocity.MeasurementValue;
+using com.apama.cumulocity.Event;
+
+
+/** 
+This monitor is responsible for calculating the duration between door open and door closed event
+*/
+monitor FridgeDoorMonitor {
+	action onload() {
+		
+        monitor.subscribe(Event.CHANNEL);
+        
+		// Listen to all door open events
+    	on all Event(type="c8y_DoorOpenEvent") as openEvent {
+                                    
+			string deviceId := openEvent.source;
+			float openTime := openEvent.time;
+			
+			log "Time now is "+ openTime.toString() + ", device ID = " + deviceId at INFO;
+			
+			// Listen to the next door close event of the same device
+			on Event(type="c8y_DoorCloseEvent", source=deviceId) as closeEvent {
+
+				float closeTime := closeEvent.time;
+
+				// Add a measurement
+				Measurement measure := new Measurement;
+				measure.source := deviceId;
+				measure.time := closeTime;
+				measure.type := "c8y_DoorOpenedDuration";
+				
+				MeasurementValue ms := new MeasurementValue;
+				ms.unit := "s";
+				ms.value := closeTime - openTime;
+
+				measure.measurements[measure.type] := {"duration": ms};
+
+				send measure to Measurement.CREATE_CHANNEL;   
+			}	  
+        }
+	}
+}
