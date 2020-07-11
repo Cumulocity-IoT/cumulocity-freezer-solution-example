@@ -11,7 +11,7 @@ This repository contains all code snippets and examples shown during the webseri
 - 2020 June 11th - #3 Adding solution dashboards - [Recording](https://www.brighttalk.com/webcast/17917/409193)
 - 2020 June 18th - #4 Performing analytics and actions - [Recording](https://www.brighttalk.com/webcast/17917/409195)
 - 2020 June 25th - #5 Integrating 3rd party data sets - [Recording](https://www.brighttalk.com/webcast/17917/409196)
-- 2020 July 2nd - #6 Developing a tailored web application
+- 2020 July 2nd - #6 Developing a tailored web application - [Recording](https://www.brighttalk.com/webcast/17917/409197)
 
 Recordings: Soon
 
