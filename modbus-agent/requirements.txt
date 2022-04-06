@@ -9,5 +9,5 @@ PyHamcrest==2.0.2
 pymodbus==2.3.0
 pyserial==3.4
 six==1.14.0
-Twisted==20.3.0
+Twisted==22.2.0
 zope.interface==5.1.0
