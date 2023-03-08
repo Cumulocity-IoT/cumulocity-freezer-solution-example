@@ -1,3 +1,5 @@
+# !!! Archived!!! This repository is no longer relevant!
+
 # Cumulocity Solution Example: Freezer Monitoring
 
 This repository contains all code snippets and examples shown during the webseries. For all additional material (e.g. the slides) please check the recordings. All material is attached there.
